@@ -41,7 +41,7 @@ Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" ( _
     ByVal lpWindowName As String) _
     As LongPtr
 
-Sub SaveAs_PopUp()
+Sub send_text_to_field()
     Dim appHwnd As LongPtr
     Dim childHwnd As LongPtr
     Dim sChildText As String
@@ -73,7 +73,6 @@ Sub SaveAs_PopUp()
         Debug.Print sChildClass
         Debug.Print "============="
 
-        ' Look for the Edit field and Save button
         If sChildClass = "Edit" Then
             bNext = False
             Call SendMessageByString(childHwnd, WM_SETTEXT, 0, text_to_write)
@@ -83,7 +82,7 @@ Sub SaveAs_PopUp()
         childHwnd = GetWindow(childHwnd, GW_HWNDNEXT)
     Loop
 
-    MsgBox "Save As dialog not found!", vbExclamation
+    MsgBox "Window not found!", vbExclamation
 End Sub
 
 Public Function WindowText(hwnd As LongPtr) As String
